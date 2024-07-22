@@ -4,12 +4,25 @@ use Illuminate\Support\Facades\Route;
 use Spatie\FlareClient\View;
 
 Route::get('/', function () {
-    return view('index',['greeting'=>'Hello','name'=>'Abay']);
+    return view('index');
 });
 
 
-Route::get('/about', function () {
-    return View('about');
+Route::get('/jobs', function () {
+    return View('jobs',[
+        'jobs'=>[
+                 'title'=>'Director',
+                 'salary'=> '$40'
+                ],
+                [
+                 'title'=>'Programmer',
+                 'salary'=> '$50'
+                ],
+                 [
+                 'title'=>'Teacher',
+                 'salary'=> '$150'
+                ]
+    ]);
 });
 
 Route::get('/contact', function () {
