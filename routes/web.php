@@ -11,17 +11,19 @@ Route::get('/', function () {
 Route::get('/jobs', function () {
     return View('jobs',[
         'jobs'=>[
+            [
                  'title'=>'Director',
                  'salary'=> '$40'
-                ],
-                [
-                 'title'=>'Programmer',
-                 'salary'=> '$50'
-                ],
-                 [
-                 'title'=>'Teacher',
-                 'salary'=> '$150'
-                ]
+            ],
+            [
+                'title'=>'Programmer',
+                'salary'=> '$50'
+            ],
+            [
+                'title'=>'Teacher',
+                'salary'=> '$30'
+           ]
+        ]
     ]);
 });
 
