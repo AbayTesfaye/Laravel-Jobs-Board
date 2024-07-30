@@ -1,59 +1,24 @@
 <?php
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
-use Spatie\FlareClient\View;
+use App\Models\job;
 
 Route::get('/', function () {
     return view('index');
 });
 
 
-Route::get('/jobs', function () {
+Route::get('/jobs', function ()
+ {
     return View('jobs',[
-        'jobs'=>[
-            [
-                 'id'=>1,
-                 'title'=>'Director',
-                 'salary'=> '$40'
-            ],
-            [
-                'id'=>2,
-                'title'=>'Programmer',
-                'salary'=> '$50'
-            ],
-            [
-                'id'=>3,
-                'title'=>'Teacher',
-                'salary'=> '$30'
-           ]
-        ]
+        'jobs'=> job::all()
     ]);
 });
 
-Route::get('/jobs/{id}', function ($id) {
-//    dd($id);
-   $jobs= [
-            [
-                 'id'=>1,
-                 'title'=>'Director',
-                 'salary'=> '$40'
-            ],
-            [
-                'id'=>2,
-                'title'=>'Programmer',
-                'salary'=> '$50'
-            ],
-            [
-                'id'=>3,
-                'title'=>'Teacher',
-                'salary'=> '$30'
-           ]
-            ];
-  $job = Arr::first($jobs, fn($job) => $job['id'] == $id);
+Route::get('/jobs/{id}', function ($id)  {
+  $job = job::find($id);
 
     return view('job',['job'=> $job]);
-
 
 });
 
