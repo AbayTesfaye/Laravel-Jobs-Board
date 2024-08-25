@@ -10,19 +10,33 @@ Route::get('/', function () {
 
 Route::get('/jobs', function ()
  {
-    $jobs=job::with('employer')->simplePaginate(3);
-    return View('jobs',[
+    $jobs=job::with('employer')->latest()->simplePaginate(3);
+    return View('jobs.index',[
         'jobs'=> $jobs
     ]);
 });
 
+Route::get('/jobs/create', function(){
+   return view('jobs.create');
+ });
+
 Route::get('/jobs/{id}', function ($id)  {
   $job = job::find($id);
 
-    return view('job',['job'=> $job]);
-
+    return view('jobs.show',['job'=> $job]);
 });
 
+Route::post('/jobs', function(){
+  // validation
+
+  Job::create([
+    'title'=>request('title'),
+    'salary' => request('salary'),
+    'employer_id'=>1,
+  ]);
+
+  return redirect('/jobs');
+});
 Route::get('/contact', function () {
     return view('contact');
 
