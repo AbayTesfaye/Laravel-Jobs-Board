@@ -1,8 +1,9 @@
 <?php
-
 namespace App\Providers;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Job; // Import the Job model
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Model::perventLazyLoading();
+        // Define a Gate for editing a job
+       
     }
 }

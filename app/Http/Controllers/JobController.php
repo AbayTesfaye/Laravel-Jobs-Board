@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\job;
-use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
+
 
 class JobController extends Controller
 {
@@ -17,9 +20,11 @@ class JobController extends Controller
     public function create(){
         return view('jobs.create');
     }
+
     public function show(Job $job){
         return view('jobs.show',['job'=> $job]);
     }
+
     public function store(){
           // validation
   request()->validate([
@@ -35,10 +40,17 @@ class JobController extends Controller
 
   return redirect('/jobs');
     }
+
     public function edit(Job $job){
 
+        if(Auth::guest()){
+            return redirect('/login');
+        }
+
+       Gate::authorize('edit-job', $job);
       return view('jobs.edit',['job'=> $job]);
     }
+
     public function update(Job $job){
          // validation
      request()->validate([
